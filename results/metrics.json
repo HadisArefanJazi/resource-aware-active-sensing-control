@@ -1,0 +1,546 @@
+{
+  "experiment": "resource_aware_active_sensing_control",
+  "training": {
+    "episodes": 1500,
+    "learning_rate": 0.002,
+    "dual_learning_rate": 0.05,
+    "gamma": 0.98,
+    "entropy_coefficient": 0.03,
+    "hidden_size": 64,
+    "seed": 7
+  },
+  "environment": {
+    "horizon": 40,
+    "dynamics": 1.05,
+    "control_gain": 0.75,
+    "state_limit": 4.0
+  },
+  "limits": {
+    "information_per_step": 0.8,
+    "violation_per_step": 0.05
+  },
+  "scenarios": [
+    {
+      "name": "nominal",
+      "observation_noise": 0.25,
+      "disturbance_std": 0.08,
+      "sensor_dropout": 0.0,
+      "communication_dropout": 0.0,
+      "dynamics_scale": 1.0
+    },
+    {
+      "name": "noisy",
+      "observation_noise": 0.8,
+      "disturbance_std": 0.08,
+      "sensor_dropout": 0.0,
+      "communication_dropout": 0.0,
+      "dynamics_scale": 1.0
+    },
+    {
+      "name": "disturbed",
+      "observation_noise": 0.25,
+      "disturbance_std": 0.3,
+      "sensor_dropout": 0.0,
+      "communication_dropout": 0.0,
+      "dynamics_scale": 1.0
+    },
+    {
+      "name": "sensor_dropout",
+      "observation_noise": 0.35,
+      "disturbance_std": 0.12,
+      "sensor_dropout": 0.35,
+      "communication_dropout": 0.0,
+      "dynamics_scale": 1.0
+    },
+    {
+      "name": "communication_limited",
+      "observation_noise": 0.35,
+      "disturbance_std": 0.12,
+      "sensor_dropout": 0.0,
+      "communication_dropout": 0.55,
+      "dynamics_scale": 1.0
+    },
+    {
+      "name": "dynamics_shift",
+      "observation_noise": 0.4,
+      "disturbance_std": 0.18,
+      "sensor_dropout": 0.15,
+      "communication_dropout": 0.0,
+      "dynamics_scale": 1.08
+    }
+  ],
+  "training_summary": {
+    "resource_aware_rl": {
+      "constrained": true,
+      "episodes": 1500,
+      "mean_reward_last_100": -14.5121,
+      "mean_information_last_100": 31.19,
+      "violation_rate_last_100": 0.0003,
+      "information_multiplier": 0.0275,
+      "violation_multiplier": 0.0
+    },
+    "unconstrained_rl": {
+      "constrained": false,
+      "episodes": 1500,
+      "mean_reward_last_100": -19.4681,
+      "mean_information_last_100": 70.74,
+      "violation_rate_last_100": 0.0022,
+      "information_multiplier": 0.0,
+      "violation_multiplier": 0.0
+    }
+  },
+  "overall": {
+    "resource_aware_rl": {
+      "mean_cumulative_reward": -10.8379,
+      "mean_control_rmse": 0.5067,
+      "mean_information_cost": 31.8467,
+      "mean_state_violation_rate": 0.0,
+      "information_budget_violation_frequency": 0.3767,
+      "mean_sensing_rate": 0.6969,
+      "mean_communication_rate": 0.0496,
+      "robustness_score": 0.6827
+    },
+    "full_information": {
+      "mean_cumulative_reward": -7.0932,
+      "mean_control_rmse": 0.3779,
+      "mean_information_cost": 120.0,
+      "mean_state_violation_rate": 0.0,
+      "information_budget_violation_frequency": 1.0,
+      "mean_sensing_rate": 1.0,
+      "mean_communication_rate": 1.0,
+      "robustness_score": 0.7594
+    },
+    "fixed_sensing": {
+      "mean_cumulative_reward": -20.1871,
+      "mean_control_rmse": 0.6693,
+      "mean_information_cost": 10.0,
+      "mean_state_violation_rate": 0.0015,
+      "information_budget_violation_frequency": 0.0,
+      "mean_sensing_rate": 0.25,
+      "mean_communication_rate": 0.0,
+      "robustness_score": 0.4809
+    },
+    "unconstrained_rl": {
+      "mean_cumulative_reward": -15.4854,
+      "mean_control_rmse": 0.6084,
+      "mean_information_cost": 71.2683,
+      "mean_state_violation_rate": 0.0019,
+      "information_budget_violation_frequency": 1.0,
+      "mean_sensing_rate": 0.8961,
+      "mean_communication_rate": 0.4428,
+      "robustness_score": 0.6911
+    },
+    "classical_control": {
+      "mean_cumulative_reward": -11.9493,
+      "mean_control_rmse": 0.513,
+      "mean_information_cost": 40.0,
+      "mean_state_violation_rate": 0.0,
+      "information_budget_violation_frequency": 1.0,
+      "mean_sensing_rate": 1.0,
+      "mean_communication_rate": 0.0,
+      "robustness_score": 0.7426
+    }
+  },
+  "by_scenario": {
+    "resource_aware_rl": {
+      "nominal": {
+        "episodes": 100,
+        "mean_cumulative_reward": -7.099,
+        "reward_std": 5.5506,
+        "control_rmse": 0.4121,
+        "mean_control_effort": 0.1522,
+        "mean_information_cost": 31.47,
+        "information_cost_per_step": 0.7867,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.36,
+        "sensing_rate": 0.7067,
+        "communication_rate": 0.04
+      },
+      "noisy": {
+        "episodes": 100,
+        "mean_cumulative_reward": -9.7409,
+        "reward_std": 6.385,
+        "control_rmse": 0.485,
+        "mean_control_effort": 0.1658,
+        "mean_information_cost": 32.13,
+        "information_cost_per_step": 0.8033,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.43,
+        "sensing_rate": 0.7067,
+        "communication_rate": 0.0483
+      },
+      "disturbed": {
+        "episodes": 100,
+        "mean_cumulative_reward": -13.5094,
+        "reward_std": 7.1461,
+        "control_rmse": 0.5684,
+        "mean_control_effort": 0.294,
+        "mean_information_cost": 30.73,
+        "information_cost_per_step": 0.7682,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.24,
+        "sensing_rate": 0.6757,
+        "communication_rate": 0.0462
+      },
+      "sensor_dropout": {
+        "episodes": 100,
+        "mean_cumulative_reward": -9.0064,
+        "reward_std": 5.6107,
+        "control_rmse": 0.465,
+        "mean_control_effort": 0.1782,
+        "mean_information_cost": 31.24,
+        "information_cost_per_step": 0.781,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.35,
+        "sensing_rate": 0.695,
+        "communication_rate": 0.043
+      },
+      "communication_limited": {
+        "episodes": 100,
+        "mean_cumulative_reward": -10.5726,
+        "reward_std": 9.2738,
+        "control_rmse": 0.5062,
+        "mean_control_effort": 0.1613,
+        "mean_information_cost": 34.22,
+        "information_cost_per_step": 0.8555,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.55,
+        "sensing_rate": 0.708,
+        "communication_rate": 0.0737
+      },
+      "dynamics_shift": {
+        "episodes": 100,
+        "mean_cumulative_reward": -15.0993,
+        "reward_std": 13.1321,
+        "control_rmse": 0.6036,
+        "mean_control_effort": 0.2625,
+        "mean_information_cost": 31.29,
+        "information_cost_per_step": 0.7823,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.33,
+        "sensing_rate": 0.6893,
+        "communication_rate": 0.0465
+      }
+    },
+    "full_information": {
+      "nominal": {
+        "episodes": 100,
+        "mean_cumulative_reward": -5.9616,
+        "reward_std": 2.6576,
+        "control_rmse": 0.3446,
+        "mean_control_effort": 0.6052,
+        "mean_information_cost": 120.0,
+        "information_cost_per_step": 3.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 1.0
+      },
+      "noisy": {
+        "episodes": 100,
+        "mean_cumulative_reward": -5.9616,
+        "reward_std": 2.6576,
+        "control_rmse": 0.3446,
+        "mean_control_effort": 0.6052,
+        "mean_information_cost": 120.0,
+        "information_cost_per_step": 3.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 1.0
+      },
+      "disturbed": {
+        "episodes": 100,
+        "mean_cumulative_reward": -9.7303,
+        "reward_std": 3.5729,
+        "control_rmse": 0.4538,
+        "mean_control_effort": 0.7468,
+        "mean_information_cost": 120.0,
+        "information_cost_per_step": 3.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 1.0
+      },
+      "sensor_dropout": {
+        "episodes": 100,
+        "mean_cumulative_reward": -6.5642,
+        "reward_std": 2.7197,
+        "control_rmse": 0.3627,
+        "mean_control_effort": 0.6518,
+        "mean_information_cost": 120.0,
+        "information_cost_per_step": 3.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 1.0
+      },
+      "communication_limited": {
+        "episodes": 100,
+        "mean_cumulative_reward": -6.7851,
+        "reward_std": 2.6705,
+        "control_rmse": 0.3678,
+        "mean_control_effort": 0.6867,
+        "mean_information_cost": 120.0,
+        "information_cost_per_step": 3.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 1.0
+      },
+      "dynamics_shift": {
+        "episodes": 100,
+        "mean_cumulative_reward": -7.5563,
+        "reward_std": 5.0171,
+        "control_rmse": 0.3941,
+        "mean_control_effort": 0.6725,
+        "mean_information_cost": 120.0,
+        "information_cost_per_step": 3.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 1.0
+      }
+    },
+    "fixed_sensing": {
+      "nominal": {
+        "episodes": 100,
+        "mean_cumulative_reward": -9.8654,
+        "reward_std": 5.9712,
+        "control_rmse": 0.4656,
+        "mean_control_effort": 0.5972,
+        "mean_information_cost": 10.0,
+        "information_cost_per_step": 0.25,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.0,
+        "sensing_rate": 0.25,
+        "communication_rate": 0.0
+      },
+      "noisy": {
+        "episodes": 100,
+        "mean_cumulative_reward": -21.99,
+        "reward_std": 15.5104,
+        "control_rmse": 0.7194,
+        "mean_control_effort": 0.6448,
+        "mean_information_cost": 10.0,
+        "information_cost_per_step": 0.25,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.0,
+        "sensing_rate": 0.25,
+        "communication_rate": 0.0
+      },
+      "disturbed": {
+        "episodes": 100,
+        "mean_cumulative_reward": -20.5942,
+        "reward_std": 7.9516,
+        "control_rmse": 0.6938,
+        "mean_control_effort": 0.671,
+        "mean_information_cost": 10.0,
+        "information_cost_per_step": 0.25,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.0,
+        "sensing_rate": 0.25,
+        "communication_rate": 0.0
+      },
+      "sensor_dropout": {
+        "episodes": 100,
+        "mean_cumulative_reward": -17.7781,
+        "reward_std": 13.7893,
+        "control_rmse": 0.6451,
+        "mean_control_effort": 0.5657,
+        "mean_information_cost": 10.0,
+        "information_cost_per_step": 0.25,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.0,
+        "sensing_rate": 0.25,
+        "communication_rate": 0.0
+      },
+      "communication_limited": {
+        "episodes": 100,
+        "mean_cumulative_reward": -12.1358,
+        "reward_std": 6.1733,
+        "control_rmse": 0.5234,
+        "mean_control_effort": 0.5897,
+        "mean_information_cost": 10.0,
+        "information_cost_per_step": 0.25,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 0.0,
+        "sensing_rate": 0.25,
+        "communication_rate": 0.0
+      },
+      "dynamics_shift": {
+        "episodes": 100,
+        "mean_cumulative_reward": -38.7594,
+        "reward_std": 85.0207,
+        "control_rmse": 0.9682,
+        "mean_control_effort": 0.632,
+        "mean_information_cost": 10.0,
+        "information_cost_per_step": 0.25,
+        "state_violation_rate": 0.009,
+        "information_budget_violation_frequency": 0.0,
+        "sensing_rate": 0.25,
+        "communication_rate": 0.0
+      }
+    },
+    "unconstrained_rl": {
+      "nominal": {
+        "episodes": 100,
+        "mean_cumulative_reward": -11.4438,
+        "reward_std": 13.8157,
+        "control_rmse": 0.5268,
+        "mean_control_effort": 0.1718,
+        "mean_information_cost": 72.64,
+        "information_cost_per_step": 1.816,
+        "state_violation_rate": 0.0013,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 0.915,
+        "communication_rate": 0.4505
+      },
+      "noisy": {
+        "episodes": 100,
+        "mean_cumulative_reward": -12.3613,
+        "reward_std": 13.8873,
+        "control_rmse": 0.5483,
+        "mean_control_effort": 0.1688,
+        "mean_information_cost": 72.21,
+        "information_cost_per_step": 1.8053,
+        "state_violation_rate": 0.0013,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 0.9163,
+        "communication_rate": 0.4445
+      },
+      "disturbed": {
+        "episodes": 100,
+        "mean_cumulative_reward": -17.4555,
+        "reward_std": 14.0912,
+        "control_rmse": 0.6493,
+        "mean_control_effort": 0.2955,
+        "mean_information_cost": 67.6,
+        "information_cost_per_step": 1.69,
+        "state_violation_rate": 0.0008,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 0.851,
+        "communication_rate": 0.4195
+      },
+      "sensor_dropout": {
+        "episodes": 100,
+        "mean_cumulative_reward": -13.0335,
+        "reward_std": 14.7363,
+        "control_rmse": 0.5624,
+        "mean_control_effort": 0.1905,
+        "mean_information_cost": 72.47,
+        "information_cost_per_step": 1.8117,
+        "state_violation_rate": 0.0013,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 0.9032,
+        "communication_rate": 0.4542
+      },
+      "communication_limited": {
+        "episodes": 100,
+        "mean_cumulative_reward": -14.8469,
+        "reward_std": 17.0267,
+        "control_rmse": 0.6014,
+        "mean_control_effort": 0.191,
+        "mean_information_cost": 71.32,
+        "information_cost_per_step": 1.783,
+        "state_violation_rate": 0.0018,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 0.904,
+        "communication_rate": 0.4395
+      },
+      "dynamics_shift": {
+        "episodes": 100,
+        "mean_cumulative_reward": -23.7715,
+        "reward_std": 40.7298,
+        "control_rmse": 0.7623,
+        "mean_control_effort": 0.2635,
+        "mean_information_cost": 71.37,
+        "information_cost_per_step": 1.7842,
+        "state_violation_rate": 0.005,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 0.8872,
+        "communication_rate": 0.4485
+      }
+    },
+    "classical_control": {
+      "nominal": {
+        "episodes": 100,
+        "mean_cumulative_reward": -8.8632,
+        "reward_std": 5.3969,
+        "control_rmse": 0.4362,
+        "mean_control_effort": 0.6258,
+        "mean_information_cost": 40.0,
+        "information_cost_per_step": 1.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 0.0
+      },
+      "noisy": {
+        "episodes": 100,
+        "mean_cumulative_reward": -13.1257,
+        "reward_std": 6.3216,
+        "control_rmse": 0.5431,
+        "mean_control_effort": 0.6643,
+        "mean_information_cost": 40.0,
+        "information_cost_per_step": 1.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 0.0
+      },
+      "disturbed": {
+        "episodes": 100,
+        "mean_cumulative_reward": -13.2618,
+        "reward_std": 6.3932,
+        "control_rmse": 0.5435,
+        "mean_control_effort": 0.7235,
+        "mean_information_cost": 40.0,
+        "information_cost_per_step": 1.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 0.0
+      },
+      "sensor_dropout": {
+        "episodes": 100,
+        "mean_cumulative_reward": -11.0921,
+        "reward_std": 6.6507,
+        "control_rmse": 0.4971,
+        "mean_control_effort": 0.6045,
+        "mean_information_cost": 40.0,
+        "information_cost_per_step": 1.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 0.0
+      },
+      "communication_limited": {
+        "episodes": 100,
+        "mean_cumulative_reward": -10.1841,
+        "reward_std": 5.7409,
+        "control_rmse": 0.4709,
+        "mean_control_effort": 0.6565,
+        "mean_information_cost": 40.0,
+        "information_cost_per_step": 1.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 0.0
+      },
+      "dynamics_shift": {
+        "episodes": 100,
+        "mean_cumulative_reward": -15.1689,
+        "reward_std": 12.3688,
+        "control_rmse": 0.5874,
+        "mean_control_effort": 0.683,
+        "mean_information_cost": 40.0,
+        "information_cost_per_step": 1.0,
+        "state_violation_rate": 0.0,
+        "information_budget_violation_frequency": 1.0,
+        "sensing_rate": 1.0,
+        "communication_rate": 0.0
+      }
+    }
+  }
+}
